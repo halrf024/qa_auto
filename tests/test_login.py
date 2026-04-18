@@ -36,6 +36,7 @@ def test_backpack_price(driver):
     inventory_page = InventoryPage(driver)
     assert inventory_page.get_item_price("Sauce Labs Backpack") == "$29.99"
 
+ # grrgr
 def test_wrong_login(driver):
     login_page = LoginPage(driver)
     login_page.open()
