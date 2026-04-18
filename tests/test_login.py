@@ -27,6 +27,7 @@ def test_title(driver):
     inventory_page = InventoryPage(driver)
     assert inventory_page.get_title() == "Products"
 
+# rther
 def test_backpack_price(driver):
     login_page = LoginPage(driver)
     login_page.open()
