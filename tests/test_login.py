@@ -56,3 +56,10 @@ def test_add_to_cart(driver):
     badge = inventory_page.get_cart_badge()
     assert badge == "1"
 
+def test_url_after_login(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    login_page.login("standard_user", "secret_sauce")
+
+    assert "inventory.html" in driver.current_url
+
