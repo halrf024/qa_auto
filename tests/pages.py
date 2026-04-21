@@ -73,3 +73,15 @@ class InventoryPage:
         return self.wait.until(
             EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
         ).text
+    
+    def open_cart(self):
+        self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    
+class CartPage:
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
+    
+    def get_items_count(self):
+        items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
+        return len(items)
