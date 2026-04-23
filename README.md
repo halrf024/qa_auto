@@ -12,7 +12,7 @@
 ## Структура проекта
 
 tests/
-├── pages.py        # Page Objects (LoginPage, InventoryPage)
+├── pages.py        # Page Objects (LoginPage, InventoryPage, CartPage, CheckoutPage)
 └── test_login.py   # Тесты
 
 ## Тесты
@@ -22,6 +22,9 @@ tests/
 - `test_backpack_price` — проверка цены товара
 - `test_wrong_login` — негативный логин
 - `test_add_to_cart` — добавление товара в корзину
+- `test_url_after_login` — проверка URL после логина
+- `test_cart_count` — количество товаров в корзине
+- `test_checkout` — оформление заказа (E2E: логин → корзина → checkout → оплата)
 
 ## Запуск
 
