@@ -85,3 +85,27 @@ class CartPage:
     def get_items_count(self):
         items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
         return len(items)
+    
+    def click_checkout(self):
+        self.driver.find_element(By.ID, "checkout").click()
+
+class CheckoutPage:
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
+    
+    def fill_info(self, firstname, lastname, postalcode):
+        self.driver.find_element(By.ID, "first-name").send_keys(firstname)
+        self.driver.find_element(By.ID, "last-name").send_keys(lastname)
+        self.driver.find_element(By.ID, "postal-code").send_keys(postalcode)
+        self.driver.find_element(By.ID, "continue").click()
+
+    def finish(self):
+        self.wait.until(
+            EC.element_to_be_clickable((By.ID, "finish"))
+        ).click()
+    
+    def get_complete_message(self):
+        return self.wait.until(
+            EC.visibility_of_element_located((By.CLASS_NAME, "complete-header"))
+        ).text

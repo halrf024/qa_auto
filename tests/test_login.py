@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages import CartPage, InventoryPage, LoginPage
+from pages import CheckoutPage, CartPage, InventoryPage, LoginPage
 
 @pytest.fixture
 def driver():
@@ -76,3 +76,22 @@ def test_cart_count(driver):
     
     items_count = cart_page.get_items_count()
     assert items_count == 1
+
+def test_checkout(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    login_page.login("standard_user", "secret_sauce")
+
+    inventory_page = InventoryPage(driver)
+    inventory_page.add_first_item_to_cart()
+    inventory_page.open_cart()
+
+    cart_page = CartPage(driver)
+    cart_page.click_checkout()
+    
+    checkout_page = CheckoutPage(driver)
+    checkout_page.fill_info("John", "Doe", "32300")
+
+    checkout_page.finish()
+
+    assert checkout_page.get_complete_message() == "Thank you for your order!"
