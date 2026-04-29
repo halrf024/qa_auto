@@ -27,6 +27,10 @@ class LoginPage:
             EC.visibility_of_element_located((By.CSS_SELECTOR, ".error-message-container.error"))
         ).text
     
+    def is_username_field_empty(self):
+        value = self.driver.find_element(By.ID, "user-name").get_attribute("value")
+        return value == ""
+    
 class InventoryPage:
     def __init__(self, driver):
         self.driver = driver
@@ -76,6 +80,8 @@ class InventoryPage:
     
     def open_cart(self):
         self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+
+    
     
 class CartPage:
     def __init__(self, driver):

@@ -95,3 +95,15 @@ def test_checkout(driver):
     checkout_page.finish()
 
     assert checkout_page.get_complete_message() == "Thank you for your order!"
+
+def test_logout(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    login_page.login("standard_user", "secret_sauce")
+
+    inventory_page = InventoryPage(driver)
+    inventory_page.open_menu()
+    inventory_page.click_logout()
+
+    assert login_page.is_open()
+    assert login_page.is_username_field_empty()
